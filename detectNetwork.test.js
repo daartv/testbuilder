@@ -45,17 +45,11 @@ describe('Diner\'s Club', function() {
   // Be careful, tests can have bugs too...
 
   it('has a prefix of 38 and a length of 14', function() {
- 
-    if (detectNetwork('38345678901234') !== 'Diner\'s Club') {
-      throw new Error('Test failed');
-    }
+    detectNetwork('38345678901234').should.equal("Diner's Club");
   });
 
   it('has a prefix of 39 and a length of 14', function() {
-    if (detectNetwork('39345678901234') !== 'Diner\'s Club') {
-      throw new Error('Test failed');
-    }
- 
+    detectNetwork('39345678901234').should.equal("Diner's Club");
   });
 });
 
@@ -68,11 +62,11 @@ describe('American Express', function() {
   };
 
   it('has a prefix of 34 and a length of 15', function() {
-    assert(detectNetwork('343456789012345') === 'American Express');
+    detectNetwork('343456789012345').should.equal('American Express');
   });
 
   it('has a prefix of 37 and a length of 15', function() {
-    assert(detectNetwork('373456789012345') === 'American Express');
+    detectNetwork('373456789012345').should.equal('American Express');
   });
 });
 
@@ -85,15 +79,15 @@ describe('Visa', function() {
  
 
   it('has a prefix of 4 and a length of 13', function() {
-    assert(detectNetwork('4123456789012') === 'Visa');
+    detectNetwork('4123456789012').should.equal('Visa');
   });
 
   it('has a prefix of 4 and a length of 16', function() {
-    assert(detectNetwork('4123456789012345') === 'Visa');
+    detectNetwork('4123456789012345').should.equal('Visa');
   });
 
   it('has a prefix of 4 and a length of 19', function() {
-    assert(detectNetwork('4123456789012345678') === 'Visa');
+    detectNetwork('4123456789012345678').should.equal('Visa');
   });
 });
 
@@ -105,15 +99,15 @@ describe('MasterCard', function() {
   var expect = chai.expect;
  
   it('has a prefix of 51 and a length of 16', function() {
-    expect(detectNetwork('5112345678901234')).to.equal('MasterCard');
+    detectNetwork('5112345678901234').should.equal('MasterCard');
   });
  
   it('has a prefix of 52 and a length of 16', function() {
-    expect(detectNetwork('5212345678901234')).to.equal('MasterCard');
+    detectNetwork('5212345678901234').should.equal('MasterCard');
   });
  
   it('has a prefix of 53 and a length of 16', function() {
-    expect(detectNetwork('5312345678901234')).to.equal('MasterCard');
+    detectNetwork('5312345678901234').should.equal('MasterCard');
   });
  
 
@@ -137,33 +131,30 @@ describe('MasterCard', function() {
 });
 
 describe('Discover', function() {
-  var assert = chai.assert;
   // Tests without a function will be marked as "pending" and not run
   // Implement these tests (and others) and make them pass!
-  it('has a prefix of 6011 and a length of 16', function () {
-    detectNetwork('6011111111111111').should.equal("Discover");
+  it('has a prefix of 6011 and a length of 16', function() {
+    detectNetwork('6011885887589738').should.equal('Discover');
   });
-  it('has a prefix of 65 and a length of 16', function () {
-    detectNetwork('6512345678901234').should.equal("Discover");
+  it('has a prefix of 6011 and a length of 19', function() {
+    detectNetwork('6011846666546737756').should.equal('Discover');
   });
-  it('has a prefix of 6011 and a length of 19', function () {
-    detectNetwork('6011111111111111111').should.equal("Discover");
-  }); 
-  it('has a prefix of 65 and a length of 19', function () {
-    detectNetwork('6512345678901234567').should.equal("Discover");
-  })
-  for (var i = 644; i <= 649; i++){
-    var prefix = i.toString();
-    it('has a prefix of ' + i + ' and a length of 16', function () {
-      detectNetwork(prefix + "0000000000000").should.equal("Discover");
-    });
-  };
-  for (var i = 644; i <= 649; i++){
-    var prefix = i.toString();
-    it('has a prefix of ' + i + ' and a length of 19', function () {
-      detectNetwork(prefix + "0000000000000000").should.equal('Discover');
-    });
-  };
+  it('has a prefix of 65 and a length of 16', function() {
+    detectNetwork('6511845487473409').should.equal('Discover');
+  });
+  it('has a prefix of 65 and a length of 19', function() {
+    detectNetwork('6511844534907053775').should.equal('Discover');
+  });
+  for (var prefix = 644; prefix <= 649; prefix++) {
+    (function(prefix) {
+      it('has a prefix of ' + prefix + ' and a length of 16', function() {
+        detectNetwork(prefix + '3249873604444').should.equal('Discover');
+      });
+      it('has a prefix of ' + prefix + ' and a length of 19', function() {
+        detectNetwork(prefix + '9348230477776676').should.equal('Discover');
+      });
+    })(prefix)
+  }
 });
 
 describe('Maestro', function() {
@@ -202,3 +193,5 @@ describe('Maestro', function() {
 
 describe('should support China UnionPay')
 describe('should support Switch')
+
+
