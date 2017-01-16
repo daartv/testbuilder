@@ -141,27 +141,27 @@ describe('Discover', function() {
   // Tests without a function will be marked as "pending" and not run
   // Implement these tests (and others) and make them pass!
   it('has a prefix of 6011 and a length of 16', function () {
-    assert(detectNetwork('6011111111111111') === "Discover");
+    detectNetwork('6011111111111111').should.equal("Discover");
   });
   it('has a prefix of 65 and a length of 16', function () {
-    assert(detectNetwork('6512345678901234') === "Discover");
+    detectNetwork('6512345678901234').should.equal("Discover");
   });
   it('has a prefix of 6011 and a length of 19', function () {
-    assert(detectNetwork('6011111111111111111') === "Discover");
+    detectNetwork('6011111111111111111').should.equal("Discover");
   }); 
   it('has a prefix of 65 and a length of 19', function () {
-    assert(detectNetwork('6512345678901234567') === "Discover");
+    detectNetwork('6512345678901234567').should.equal("Discover");
   })
   for (var i = 644; i <= 649; i++){
     var prefix = i.toString();
     it('has a prefix of ' + i + ' and a length of 16', function () {
-      assert(detectNetwork(prefix + "0000000000000") === "Discover");
+      detectNetwork(prefix + "0000000000000").should.equal("Discover");
     });
   };
   for (var i = 644; i <= 649; i++){
     var prefix = i.toString();
     it('has a prefix of ' + i + ' and a length of 19', function () {
-      assert(detectNetwork(prefix + "0000000000000000") === "Discover");
+      detectNetwork(prefix + "0000000000000000").should.equal('Discover');
     });
   };
 });
