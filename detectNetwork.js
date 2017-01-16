@@ -14,17 +14,28 @@ var detectNetwork = function(cardNumber) {
 
   // Once you've read this, go ahead and try to implement this function, then return to the console.
   var length = cardNumber.length;
-  if (length === 14 && (cardNumber.startsWith("38") || cardNumber.startsWith("39"))){
+  var prefixOfOne = cardNumber[0];
+  var prefixOfTwo = cardNumber.substring(0,2);
+  var prefixOfThree = cardNumber.substring(0,3);
+  var prefixOfFour = cardNumber.substring(0,4);
+  var prefixOfSix = cardNumber.substring(0,6);
+
+  if (length === 14 && (prefixOfTwo === '38' || prefixOfTwo === '39')){
   	return "Diner's Club";
-  } else if (length === 15 && (cardNumber.startsWith("34") || cardNumber.startsWith("37"))){
+  } else if (length === 15 && (prefixOfTwo === '34' || prefixOfTwo === "37")){
   	return "American Express";
-  } else if (length === 16 && (cardNumber.startsWith("51") || cardNumber.startsWith("52") || cardNumber.startsWith("53") || cardNumber.startsWith("54") || cardNumber.startsWith("55"))){
+  } else if (length === 16 && (prefixOfTwo === '51' || prefixOfTwo === '52' || prefixOfTwo === '53' || prefixOfTwo === '54' || prefixOfTwo === '55')){
   	return "MasterCard";
+  } else if ((prefixOfFour === '4903' || prefixOfFour === "4905" || prefixOfFour === "4911" || prefixOfFour === "4936" || prefixOfSix === "654182" || prefixOfSix === "633110" || prefixOfFour === "6333" || prefixOfSix === "564182" || prefixOfFour === "6759") && (length === 16 || length === 18 || length === 19)){
+  	return "Switch"
   } else if (cardNumber.startsWith("4") && (length === 13 || length === 16 || length === 19)) {
   	return "Visa";
   } else if ((cardNumber.startsWith("6011") || cardNumber.startsWith("644") || cardNumber.startsWith("645") || cardNumber.startsWith("646") || cardNumber.startsWith("647") || cardNumber.startsWith("648") || cardNumber.startsWith("649") || cardNumber.startsWith("65")) && (length === 16 || length === 19)) {
   	return "Discover";
   } else if ((cardNumber.startsWith("5018") || cardNumber.startsWith("5020") || cardNumber.startsWith("5038") || cardNumber.startsWith("6304")) && (length >= 12 && length <= 19)) {
   	return "Maestro"
+  } else if ((length === 16 || length === 17 || length === 18 || length === 19) && (624 <= prefixOfThree <= 626 || 622126 <= prefixOfSix <= 622925 || 6282 <= prefixOfFour <= 6288)){
+  	return "China UnionPay"
   }
 };
+console.log(detectNetwork("5641821234567890"));
